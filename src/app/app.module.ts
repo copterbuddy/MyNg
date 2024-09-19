@@ -1,18 +1,21 @@
+import { DevsComponent } from './components/devs/devs.component';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { provideRouter, RouterOutlet } from '@angular/router';
+import { routes } from './app.routes';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    DevsComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    RouterOutlet
   ],
-  providers: [],
+  providers: [provideRouter(routes)],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
