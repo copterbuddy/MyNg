@@ -8,13 +8,15 @@ import { routes } from './app.routes';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HeaderComponent } from './components/devs/header/header.component';
 import { SetTitleComponent } from './components/devs/set-title/set-title.component';
+import { OutputDynamicContentWithStringComponent } from './components/devs/output-dynamic-content-with-string/output-dynamic-content-with-string.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DevsComponent,
     HeaderComponent,
-    SetTitleComponent
+    SetTitleComponent,
+    OutputDynamicContentWithStringComponent
   ],
   imports: [
     BrowserModule,
