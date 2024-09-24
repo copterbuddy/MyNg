@@ -28,6 +28,10 @@ export class DevsComponent{
     {
       link: '/devs/getter-function',
       text: 'devs/getter-function'
+    },
+    {
+      link: '/devs/emit-event-by-ng',
+      text: 'devs/emit-event-by-ng'
     }
   ]
 
