@@ -3,6 +3,7 @@ import { DevsComponent } from "./components/devs/devs.component";
 import { SetTitleComponent } from "./components/devs/set-title/set-title.component";
 import { OutputDynamicContentWithStringComponent } from "./components/devs/output-dynamic-content-with-string/output-dynamic-content-with-string.component";
 import { DisplayImageComponent } from "./components/devs/display-image/display-image.component";
+import { GetterFunctionComponent } from "./components/devs/getter-funcction/getter-function.component";
 
 export const routes: Routes = [
   {
@@ -26,5 +27,9 @@ export const routes: Routes = [
   {
     path: 'devs/display-image',
     component: DisplayImageComponent
+  },
+  {
+    path: 'devs/getter-function',
+    component: GetterFunctionComponent
   }
 ]

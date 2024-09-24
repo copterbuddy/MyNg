@@ -24,6 +24,10 @@ export class DevsComponent{
     {
       link: '/devs/display-image',
       text: 'display-image'
+    },
+    {
+      link: '/devs/getter-function',
+      text: 'devs/getter-function'
     }
   ]
 
