@@ -20,6 +20,10 @@ export class DevsComponent{
     {
       link: '/devs/output-dynamic-content-with-string',
       text: 'display dynamic content with string'
+    },
+    {
+      link: '/devs/display-image',
+      text: 'display-image'
     }
   ]
 
