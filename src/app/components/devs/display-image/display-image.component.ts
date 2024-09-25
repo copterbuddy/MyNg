@@ -3,7 +3,8 @@ import { DUMMY_USERS } from '../dummy-users';
 
 @Component({
   selector: 'app-display-image',
-  standalone: false,
+  standalone: true,
+  imports: [],
   templateUrl: './display-image.component.html',
   styleUrl: './display-image.component.css'
 })

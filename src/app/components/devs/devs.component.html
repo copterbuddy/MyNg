@@ -2,18 +2,16 @@
   <div class="container-small d-flex justify-content-center">
     <div class="d-flex flex-column">
       <app-header></app-header>
-
+      <div>test</div>
       <div class="submenu">
-        <ng-container *ngIf="subMenus && subMenus.length > 0; else noItems">
-          <ng-container *ngFor="let item of subMenus">
-            <div>
-              <a [routerLink]="item.link">{{ item.text }}</a>
-            </div>
-          </ng-container>
-        </ng-container>
-        <ng-template #noItems>
+        @for (item of getSubMenu(); track item.text) {
+          <div>
+            <a [routerLink]="item.link">{{ item.text }}</a>
+          </div>
+        }
+        @empty {
           NO ITEMS!!
-        </ng-template>
+        }
       </div>
     </div>
   </div>

@@ -11,11 +11,12 @@ export const routes: Routes = [
     path: '',
     redirectTo: '/devs',
     pathMatch: 'full',
-    title: 'devs'
+    title: 'main'
   },
   {
     path: 'devs',
-    component: DevsComponent
+    component: DevsComponent,
+    title: 'devs'
   },
   {
     path: 'devs/set-title',

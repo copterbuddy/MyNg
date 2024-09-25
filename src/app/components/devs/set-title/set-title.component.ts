@@ -3,6 +3,8 @@ import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-set-title',
+  standalone: true,
+  imports: [],
   templateUrl: './set-title.component.html',
   styleUrls: ['./set-title.component.css']
 })
