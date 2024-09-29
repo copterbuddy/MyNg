@@ -11,7 +11,7 @@ import { Subscription } from 'rxjs';
     <p>pokemon works!</p>
     @for(item of pokemonList(); track item.name) {
     <div>
-      <img [src]="item.url" alt="user" />
+      <img [src]="image()" alt="user" />
       <a [routerLink]="item.url">{{ item.name }}</a>
     </div>
     }
@@ -25,6 +25,7 @@ export class PokemonComponent implements OnInit, OnDestroy {
   sub = new Subscription();
   pokemonList = signal<Pokemon[]>([]);
   total = signal<number>(0);
+  image = signal<string>('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/132.png');
 
   constructor(private http: HttpClient) {}
 
