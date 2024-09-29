@@ -1,23 +1,57 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
-import { Observable, tap } from 'rxjs';
+import { Component, OnDestroy, OnInit, signal } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-pokemon',
   standalone: true,
-  imports: [],
-  templateUrl: './pokemon.component.html',
-  styleUrl: './pokemon.component.css'
+  imports: [RouterLink],
+  template: `
+    <p>pokemon works!</p>
+    @for(item of pokemonList(); track item.name) {
+    <div>
+      <img [src]="item.url" alt="user" />
+      <a [routerLink]="item.url">{{ item.name }}</a>
+    </div>
+    }
+    <div>
+      <label>{{ total() }}</label>
+    </div>
+  `,
+  styleUrl: './pokemon.component.css',
 })
-export class PokemonComponent implements OnInit {
+export class PokemonComponent implements OnInit, OnDestroy {
+  sub = new Subscription();
+  pokemonList = signal<Pokemon[]>([]);
+  total = signal<number>(0);
 
-  constructor(
-    private http: HttpClient
-  ) {}
+  constructor(private http: HttpClient) {}
 
   ngOnInit(): void {
-    var sub = this.http.get('https://pokeapi.co/api/v2/pokemon?limit=10&offset=0').subscribe(data => {
-      console.log(data);
-    })
+    this.sub = this.http.get<PokemonResponse>(
+        'https://pokeapi.co/api/v2/pokemon?limit=10&offset=0'
+      )
+      .subscribe((data) => {
+        console.log(data);
+        this.pokemonList.set(data.results);
+        this.total.set(data.count);
+      });
   }
+
+  ngOnDestroy(): void{
+    this.sub.unsubscribe();
+  }
+}
+
+export interface PokemonResponse {
+  count: number;
+  next: string;
+  previous: string;
+  results: Pokemon[];
+}
+
+export interface Pokemon {
+  name: string;
+  url: string;
 }
