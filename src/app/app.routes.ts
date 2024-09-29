@@ -5,6 +5,7 @@ import { OutputDynamicContentWithStringComponent } from "./components/devs/outpu
 import { DisplayImageComponent } from "./components/devs/display-image/display-image.component";
 import { GetterFunctionComponent } from "./components/devs/getter-function/getter-function.component";
 import { EmitEventByNgComponent } from "./components/devs/emit-event-by-ng/emit-event-by-ng.component";
+import { PokemonComponent } from "./components/devs/pokemon/pokemon.component";
 
 export const routes: Routes = [
   {
@@ -17,6 +18,11 @@ export const routes: Routes = [
     path: 'devs',
     component: DevsComponent,
     title: 'devs'
+  },
+  {
+    path: 'devs/pokemon',
+    component: PokemonComponent,
+    title: 'pokemon'
   },
   {
     path: 'devs/set-title',

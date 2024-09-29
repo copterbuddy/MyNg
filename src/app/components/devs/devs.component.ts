@@ -2,7 +2,7 @@ import { Component, computed, ElementRef, signal } from '@angular/core';
 import { RouterLink, RouterModule } from '@angular/router';
 import { HeaderComponent } from './header/header.component';
 
-interface subMenu {
+interface SubMenu {
   link: string;
   text: string;
 }
@@ -15,7 +15,14 @@ interface subMenu {
   styleUrls: ['./devs.component.css'],
 })
 export class DevsComponent {
-  subMenus = signal<subMenu[]>([
+  project = signal<SubMenu[]>([
+    {
+      link: '/devs/pokemon',
+      text: 'pokemon',
+    },
+  ])
+
+  subMenu = signal<SubMenu[]>([
     {
       link: '/devs/set-title',
       text: 'Set Title',
@@ -37,7 +44,10 @@ export class DevsComponent {
       text: 'devs/emit-event-by-ng',
     },
   ])
-  getSubMenu = computed(() => this.subMenus())
+
+  getSubMenu = computed(() => this.subMenu())
+
+  getProject = computed(() => this.project())
 
   constructor(private elementRef: ElementRef) {}
 
