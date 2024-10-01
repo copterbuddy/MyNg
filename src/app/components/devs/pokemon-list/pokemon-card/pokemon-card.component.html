@@ -1,0 +1,11 @@
+@if (pokemonDetail()?.sprites?.back_default) {
+  <div>
+    <img [src]="pokemonDetail()?.sprites?.back_default" alt="user" />
+  </div>}
+@else {
+  <div class="spinner-grow" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+}
+
+<a [routerLink]="pokemon().url">{{ pokemon().name }}</a>
