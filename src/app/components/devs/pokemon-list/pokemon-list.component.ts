@@ -17,21 +17,14 @@ import { PokemonCardComponent } from './pokemon-card/pokemon-card.component';
   selector: 'app-pokemon',
   standalone: true,
   imports: [RouterLink,PokemonCardComponent],
-  template: `
-    <p>pokemon works!</p>
-    @for(pokemon of pokemonList(); track pokemon.name) {
-    <div>
-      <app-pokemon-card [pokemon]="pokemon"></app-pokemon-card>
-    </div>
-    }
-  `,
+  templateUrl: './pokemon-list.component.html',
   styleUrl: './pokemon-list.component.css',
 })
 export class PokemonListComponent implements OnInit, OnDestroy {
   sub = new Subscription();
   pokemonList = signal<Pokemon[]>([]);
 
-  constructor(private pokemonService: PokemonService) {
+  constructor(private readonly pokemonService: PokemonService) {
     effect(() => {
       console.log('effect', this.pokemonList());
     });
