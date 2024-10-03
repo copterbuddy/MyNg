@@ -44,15 +44,4 @@ export class DevsComponent {
       text: 'devs/emit-event-by-ng',
     },
   ])
-
-  getSubMenu = computed(() => this.subMenu())
-
-  getProject = computed(() => this.project())
-
-  constructor(private elementRef: ElementRef) {}
-
-  ngAfterViewInit() {
-    this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor =
-      'bisque';
-  }
 }
