@@ -12,11 +12,12 @@ import { Subscription, tap } from 'rxjs';
 import { Pokemon } from './pokemon-list.model';
 import { PokemonService } from './pokemon-list.service';
 import { PokemonCardComponent } from './pokemon-card/pokemon-card.component';
+import { PokemonMenuComponent } from "../../shared/sidebars/pokemon-menu/pokemon-menu.component";
 
 @Component({
   selector: 'app-pokemon',
   standalone: true,
-  imports: [RouterLink,PokemonCardComponent],
+  imports: [RouterLink, PokemonCardComponent, PokemonMenuComponent],
   templateUrl: './pokemon-list.component.html',
   styleUrl: './pokemon-list.component.css',
 })
@@ -24,11 +25,10 @@ export class PokemonListComponent implements OnInit, OnDestroy {
   sub = new Subscription();
   pokemonList = signal<Pokemon[]>([]);
 
-  constructor(private readonly pokemonService: PokemonService) {
-    effect(() => {
-      console.log('effect', this.pokemonList());
-    });
-  }
+  constructor(
+    private readonly pokemonService: PokemonService
+  )
+  {}
 
   ngOnInit(): void {
     this.sub = this.pokemonService.getPokemons()
