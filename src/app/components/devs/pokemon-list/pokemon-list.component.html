@@ -1,7 +1,5 @@
 <div class="d-flex flex-row">
-  <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark">
-    <app-pokemon-menu></app-pokemon-menu>
-  </div>
+  <app-pokemon-menu  class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark"></app-pokemon-menu>
   <div class="d-flex flex-row flex-wrap justify-content-between">
     @for(pokemon of pokemonList(); track pokemon.name) {
       <div class="col-4">
