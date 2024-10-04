@@ -1,15 +1,15 @@
 import { HttpClient } from '@angular/common/http';
 import { computed, Injectable, Signal, signal } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { Pokemon, PokemonListResponse } from './pokemon-list.model';
+import { Pokemon, PokemonListResponse } from './pokemon-shop.model';
 
 @Injectable({
   providedIn: 'root'
 })
-export class PokemonService {
+export class PokemonShopService {
   pokemonList = signal<Pokemon[]>([]);
 
-  constructor(private http: HttpClient) { }
+  constructor(private readonly http: HttpClient) { }
 
   getPokemons(){
     return this.http

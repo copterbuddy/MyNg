@@ -1,8 +1,8 @@
-import { Sprites } from './../pokemon-list.model';
+import { Sprites } from '../pokemon-shop.model';
 import { Component, computed, input, OnInit, signal } from '@angular/core';
-import { Pokemon, PokemonDetail } from '../pokemon-list.model';
+import { Pokemon, PokemonDetail } from '../pokemon-shop.model';
 import { RouterLink } from '@angular/router';
-import { PokemonService } from '../pokemon-list.service';
+import { PokemonShopService } from '../pokemon-shop.service';
 
 @Component({
   selector: 'app-pokemon-card',
@@ -15,7 +15,7 @@ export class PokemonCardComponent implements OnInit {
   pokemon = input.required<Pokemon>()
   pokemonDetail = signal<PokemonDetail | null>(null)
 
-  constructor(private pokemonService: PokemonService){}
+  constructor(private pokemonService: PokemonShopService){}
 
   ngOnInit(): void{
     this.getPokemonImage()

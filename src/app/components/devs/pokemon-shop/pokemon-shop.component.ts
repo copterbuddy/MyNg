@@ -9,8 +9,8 @@ import {
 } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { Subscription, tap } from 'rxjs';
-import { Pokemon } from './pokemon-list.model';
-import { PokemonService } from './pokemon-list.service';
+import { Pokemon } from './pokemon-shop.model';
+import { PokemonShopService } from './pokemon-shop.service';
 import { PokemonCardComponent } from './pokemon-card/pokemon-card.component';
 import { PokemonMenuComponent } from "../../shared/sidebars/pokemon-menu/pokemon-menu.component";
 
@@ -18,15 +18,15 @@ import { PokemonMenuComponent } from "../../shared/sidebars/pokemon-menu/pokemon
   selector: 'app-pokemon',
   standalone: true,
   imports: [RouterLink, PokemonCardComponent, PokemonMenuComponent],
-  templateUrl: './pokemon-list.component.html',
-  styleUrl: './pokemon-list.component.css',
+  templateUrl: './pokemon-shop.component.html',
+  styleUrl: './pokemon-shop.component.css',
 })
-export class PokemonListComponent implements OnInit, OnDestroy {
+export class PokemonShopComponent implements OnInit, OnDestroy {
   sub = new Subscription();
   pokemonList = signal<Pokemon[]>([]);
 
   constructor(
-    private readonly pokemonService: PokemonService
+    private readonly pokemonService: PokemonShopService
   )
   {}
 
