@@ -15,7 +15,10 @@ export class PokemonCardComponent implements OnInit {
   pokemon = input.required<Pokemon>()
   pokemonDetail = signal<PokemonDetail | null>(null)
 
-  constructor(private pokemonService: PokemonShopService){}
+  constructor(
+    private readonly pokemonService: PokemonShopService
+  )
+  {}
 
   ngOnInit(): void{
     this.getPokemonImage()

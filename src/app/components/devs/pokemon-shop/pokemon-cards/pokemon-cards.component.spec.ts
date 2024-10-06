@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PokemonHeaderComponent } from './pokemon-header.component';
+import { PokemonCardsComponent } from './pokemon-cards.component';
 
-describe('PokemonHeaderComponent', () => {
-  let component: PokemonHeaderComponent;
-  let fixture: ComponentFixture<PokemonHeaderComponent>;
+describe('PokemonCardsComponent', () => {
+  let component: PokemonCardsComponent;
+  let fixture: ComponentFixture<PokemonCardsComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [PokemonHeaderComponent]
+      imports: [PokemonCardsComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(PokemonHeaderComponent);
+    fixture = TestBed.createComponent(PokemonCardsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -6,6 +6,7 @@ import { DisplayImageComponent } from "./components/devs/display-image/display-i
 import { GetterFunctionComponent } from "./components/devs/getter-function/getter-function.component";
 import { EmitEventByNgComponent } from "./components/devs/emit-event-by-ng/emit-event-by-ng.component";
 import { PokemonShopComponent } from "./components/devs/pokemon-shop/pokemon-shop.component";
+import { MyPokemonComponent } from "./components/devs/pokemon-shop/my-pokemon/my-pokemon.component";
 
 export const routes: Routes = [
   {
@@ -23,6 +24,11 @@ export const routes: Routes = [
     path: 'devs/pokemon',
     component: PokemonShopComponent,
     title: 'pokemon'
+  },
+  {
+    path: 'devs/pokemon/my-pokemon',
+    component: MyPokemonComponent,
+    title: 'my pokemon'
   },
   {
     path: 'devs/set-title',

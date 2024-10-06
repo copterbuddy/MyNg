@@ -1,10 +1,3 @@
-<div class="d-flex flex-row">
-  <app-pokemon-menu  class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark"></app-pokemon-menu>
-  <div class="d-flex flex-row flex-wrap justify-content-between">
-    @for(pokemon of pokemonList(); track pokemon.name) {
-      <div class="col-4">
-        <app-pokemon-card [pokemon]="pokemon"></app-pokemon-card>
-      </div>
-    }
-  </div>
+<div class="overflow-hidden overflow-x-hidden overflow-y-auto">
+  <app-pokemon-cards></app-pokemon-cards>
 </div>
