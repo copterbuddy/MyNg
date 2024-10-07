@@ -5,7 +5,10 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [],
   templateUrl: './my-pokemon.component.html',
-  styleUrl: './my-pokemon.component.css'
+  styleUrl: './my-pokemon.component.css',
+  host: {
+    class: "container-fluid"
+  }
 })
 export class MyPokemonComponent {
 
