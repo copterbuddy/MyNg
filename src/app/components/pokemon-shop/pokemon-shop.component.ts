@@ -3,8 +3,8 @@ import {
 } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { PokemonCardComponent } from './pokemon-card/pokemon-card.component';
-import { PokemonMenuComponent } from "../../shared/pokemon-menu/pokemon-menu.component";
 import { PokemonCardsComponent } from "./pokemon-cards/pokemon-cards.component";
+import { PokemonMenuComponent } from '../shared/pokemon-menu/pokemon-menu.component';
 
 @Component({
   selector: 'app-pokemon',

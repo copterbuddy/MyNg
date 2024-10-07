@@ -1,22 +1,18 @@
-import { Sprites } from '../pokemon-shop.model';
 import {
-  AfterContentChecked,
-  AfterContentInit, AfterViewInit,
+  AfterViewInit,
   Component,
   computed,
-  ContentChild,
-  contentChild, ContentChildren, DestroyRef, effect,
-  ElementRef, inject,
+  DestroyRef,
+  inject,
   input,
-  OnInit, QueryList,
-  Signal,
-  signal, viewChild, ViewChild
+  OnInit,
+  signal,
+  viewChild
 } from '@angular/core';
 import { Pokemon, PokemonDetail } from '../pokemon-shop.model';
 import { RouterLink } from '@angular/router';
 import { PokemonShopService } from '../pokemon-shop.service';
-import { LoaderComponent } from '../../../shared/loader/loader.component';
-import {read} from "@popperjs/core";
+import { LoaderComponent } from '../../shared/loader/loader.component';
 
 @Component({
   selector: 'app-pokemon-card',

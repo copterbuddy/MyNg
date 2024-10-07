@@ -9,7 +9,7 @@ import {
   signal,
   ViewChild
 } from '@angular/core';
-import {PokemonCardComponent} from "../../devs/pokemon-shop/pokemon-card/pokemon-card.component";
+import {PokemonCardComponent} from "../../pokemon-shop/pokemon-card/pokemon-card.component";
 
 @Component({
   selector: 'app-loader',
