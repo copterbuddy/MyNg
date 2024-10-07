@@ -1,18 +1,9 @@
-import { HttpClient } from '@angular/common/http';
 import {
-  Component,
-  computed,
-  effect,
-  OnDestroy,
-  OnInit,
-  signal
+  Component
 } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
-import { Subscription, tap } from 'rxjs';
-import { Pokemon } from './pokemon-shop.model';
-import { PokemonShopService } from './pokemon-shop.service';
 import { PokemonCardComponent } from './pokemon-card/pokemon-card.component';
-import { PokemonMenuComponent } from "../../shared/sidebars/pokemon-menu/pokemon-menu.component";
+import { PokemonMenuComponent } from "../../shared/pokemon-menu/pokemon-menu.component";
 import { PokemonCardsComponent } from "./pokemon-cards/pokemon-cards.component";
 
 @Component({

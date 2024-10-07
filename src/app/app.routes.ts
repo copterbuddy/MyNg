@@ -11,7 +11,7 @@ import { MyPokemonComponent } from "./components/devs/pokemon-shop/my-pokemon/my
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: '/devs',
+    redirectTo: '/devs/pokemon',
     pathMatch: 'full',
     title: 'main'
   },
@@ -23,7 +23,7 @@ export const routes: Routes = [
   {
     path: 'devs/pokemon',
     component: PokemonShopComponent,
-    title: 'pokemon'
+    title: 'pokemon',
   },
   {
     path: 'devs/pokemon/my-pokemon',

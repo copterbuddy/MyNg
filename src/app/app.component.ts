@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import {
   RouterOutlet,
 } from '@angular/router';
-import { PokemonMenuComponent } from './components/shared/sidebars/pokemon-menu/pokemon-menu.component';
+import { PokemonMenuComponent } from './components/shared/pokemon-menu/pokemon-menu.component';
 
 @Component({
   selector: 'app-root',

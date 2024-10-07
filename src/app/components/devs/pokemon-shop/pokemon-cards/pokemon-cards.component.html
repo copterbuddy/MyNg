@@ -1,7 +1,7 @@
-<div class="d-flex flex-row flex-wrap justify-content-between vh-100">
+<div class="container-fluid d-flex flex-row flex-wrap justify-content-between vh-100">
   @for(pokemon of pokemonList(); track pokemon.name) {
     <div class="col-4">
-      <app-pokemon-card [pokemon]="pokemon"></app-pokemon-card>
+      <app-pokemon-card class="card-center" [pokemon]="pokemon"></app-pokemon-card>
     </div>
   }
 </div>
