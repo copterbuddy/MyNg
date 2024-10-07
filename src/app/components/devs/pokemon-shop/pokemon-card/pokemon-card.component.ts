@@ -5,8 +5,8 @@ import {
   Component,
   computed,
   ContentChild,
-  contentChild, ContentChildren, effect,
-  ElementRef,
+  contentChild, ContentChildren, DestroyRef, effect,
+  ElementRef, inject,
   input,
   OnInit, QueryList,
   Signal,
@@ -38,15 +38,16 @@ import {read} from "@popperjs/core";
   styleUrl: './pokemon-card.component.css'
 })
 export class PokemonCardComponent implements OnInit,AfterViewInit {
+  destroyRef = inject(DestroyRef)
   pokemon = input.required<Pokemon>()
-  pokemonDetail = signal<PokemonDetail | null>(null)
-  loading = computed(() => this.pokemonDetail() == null)
   loaderComponent = viewChild<LoaderComponent | undefined>('loader')
 
-  constructor(
-    private readonly pokemonService: PokemonShopService,
-  )
-  {}
+  pokemonService = inject(PokemonShopService)
+
+  pokemonDetail = signal<PokemonDetail | null>(null)
+  loading = computed(() => this.pokemonDetail() == null)
+
+  constructor(){}
 
   ngOnInit(): void{
     this.getPokemonImage()
@@ -56,8 +57,7 @@ export class PokemonCardComponent implements OnInit,AfterViewInit {
   }
 
   getPokemonImage(): void{
-
-    this.pokemonService.getPokemonDetail(this.pokemon().name).subscribe({
+    let sub = this.pokemonService.getPokemonDetail(this.pokemon().name).subscribe({
       next: (detail) => {
         this.pokemonDetail.set(detail)
         this.loaderComponent()?.isLoading.set(false);
@@ -66,7 +66,9 @@ export class PokemonCardComponent implements OnInit,AfterViewInit {
         this.loaderComponent()?.isLoading.set(false);
       }
     })
+
+    this.destroyRef.onDestroy(() => {
+      sub.unsubscribe()
+    })
   }
-
-
 }

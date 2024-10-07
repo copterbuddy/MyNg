@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { computed, Injectable, Signal, signal } from '@angular/core';
+import {computed, inject, Injectable, Signal, signal} from '@angular/core';
 import { concatMap, delay, map, Subscription, timeout } from 'rxjs';
 import { Pokemon, PokemonDetail, PokemonListResponse } from './pokemon-shop.model';
 
@@ -7,16 +7,10 @@ import { Pokemon, PokemonDetail, PokemonListResponse } from './pokemon-shop.mode
   providedIn: 'root'
 })
 export class PokemonShopService {
-  pokemonList = signal<Pokemon[]>([]);
-
-  constructor(private readonly http: HttpClient) { }
+  http = inject(HttpClient)
+  constructor() { }
 
   getPokemons(){
-    // return this.http
-    //   .get<PokemonListResponse>(
-    //     'https://pokeapi.co/api/v2/pokemon?limit=10&offset=0'
-    //   )
-
     return this.http
       .get<PokemonListResponse>(
         'https://pokeapi.co/api/v2/pokemon?limit=10&offset=0'

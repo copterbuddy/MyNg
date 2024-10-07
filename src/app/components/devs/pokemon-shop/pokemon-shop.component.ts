@@ -10,29 +10,11 @@ import { PokemonCardsComponent } from "./pokemon-cards/pokemon-cards.component";
   selector: 'app-pokemon',
   standalone: true,
   imports: [RouterLink, PokemonCardComponent, PokemonMenuComponent, RouterOutlet, PokemonCardsComponent],
-  templateUrl: './pokemon-shop.component.html',
+  template: `
+    <div class="overflow-hidden overflow-x-hidden overflow-y-auto">
+      <app-pokemon-cards></app-pokemon-cards>
+    </div>
+  `,
   styleUrl: './pokemon-shop.component.css',
 })
 export class PokemonShopComponent{}
-//  implements OnInit, OnDestroy {
-//   sub = new Subscription();
-//   pokemonList = signal<Pokemon[]>([]);
-
-//   constructor(
-//     private readonly pokemonService: PokemonShopService
-//   )
-//   {}
-
-//   ngOnInit(): void {
-//     this.sub = this.pokemonService.getPokemons()
-//     .subscribe({
-//       next: (pokemons) => {
-//         this.pokemonList.update((value) => [...value, ...pokemons.results]);
-//       },
-//     });
-//   }
-
-//   ngOnDestroy(): void {
-//     this.sub.unsubscribe();
-//   }
-// }
