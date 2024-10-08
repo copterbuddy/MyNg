@@ -5,12 +5,13 @@ import { routes } from './app.routes';
 import { provideHttpClient, withFetch } from '@angular/common/http';
 import { provideStore } from '@ngrx/store';
 import {provideStoreDevtools} from "@ngrx/store-devtools";
+import { pokemonReducers } from './store/pokemon/pokemon.reducers';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
     provideHttpClient(withFetch()),
-    provideStore(),
+    provideStore({ pokemon: pokemonReducers}),
     provideStoreDevtools({
       maxAge: 25, // Retains last 25 states
       logOnly: !isDevMode(), // Restrict extension to log-only mode
