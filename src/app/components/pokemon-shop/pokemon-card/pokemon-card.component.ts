@@ -15,6 +15,7 @@ import { RouterLink } from '@angular/router';
 import { PokemonShopService } from '../pokemon-shop.service';
 import { LoaderComponent } from '../../shared/loader/loader.component';
 import { Store } from '@ngrx/store';
+import { PokemonFacade } from 'src/app/store/pokemon/pokemon.facade';
 
 @Component({
   selector: 'app-pokemon-card',
@@ -37,7 +38,8 @@ import { Store } from '@ngrx/store';
 })
 export class PokemonCardComponent implements OnInit {
   private readonly destroyRef = inject(DestroyRef)
-  private readonly store = inject(Store)
+  // private readonly store = inject(Store)
+  private readonly pokemonFacade: PokemonFacade = inject(PokemonFacade)
   pokemon = input.required<Pokemon>()
   loaderComponent = viewChild<LoaderComponent | undefined>('loader')
   pokemonService = inject(PokemonShopService)
@@ -67,6 +69,7 @@ export class PokemonCardComponent implements OnInit {
   }
 
   onClickedBuy(){
-    this.store.dispatch(addPokemon({ pokemon: this.pokemon() }))
+    // this.store.dispatch(addPokemon({ pokemon: this.pokemon() }))
+    this.pokemonFacade.addPokemon(this.pokemon())
   }
 }
