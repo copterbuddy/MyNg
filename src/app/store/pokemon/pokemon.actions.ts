@@ -5,7 +5,7 @@ export const pokemonKey = '[Pokemon]'
 
 export const addPokemon = createAction(
   `${pokemonKey} Add Pokemon`,
-  props<{name: Pokemon}>()
+  props<{pokemon: Pokemon}>()
 )
 
 export const deletePokemon = createAction(

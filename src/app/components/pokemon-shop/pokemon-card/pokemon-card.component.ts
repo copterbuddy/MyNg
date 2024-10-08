@@ -1,5 +1,6 @@
+import { Pokemon } from './../pokemon-shop.model';
+import { addPokemon } from './../../../store/pokemon/pokemon.actions';
 import {
-  AfterViewInit,
   Component,
   computed,
   DestroyRef,
@@ -9,10 +10,11 @@ import {
   signal,
   viewChild
 } from '@angular/core';
-import { Pokemon, PokemonDetail } from '../pokemon-shop.model';
+import {  PokemonDetail } from '../pokemon-shop.model';
 import { RouterLink } from '@angular/router';
 import { PokemonShopService } from '../pokemon-shop.service';
 import { LoaderComponent } from '../../shared/loader/loader.component';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-pokemon-card',
@@ -25,7 +27,7 @@ import { LoaderComponent } from '../../shared/loader/loader.component';
         <div class="card-body">
           <h5 class="card-title">{{ pokemon().name}}</h5>
           <p class="card-text">{{ pokemon().name}} desc.</p>
-          <a href="#" class="btn btn-primary">Go somewhere</a>
+          <a (click)="onClickedBuy()" class="btn btn-primary">Buy</a>
         </div>
       </div>
     </app-loader>
@@ -33,13 +35,12 @@ import { LoaderComponent } from '../../shared/loader/loader.component';
   `,
   styleUrl: './pokemon-card.component.css'
 })
-export class PokemonCardComponent implements OnInit,AfterViewInit {
-  destroyRef = inject(DestroyRef)
+export class PokemonCardComponent implements OnInit {
+  private readonly destroyRef = inject(DestroyRef)
+  private readonly store = inject(Store)
   pokemon = input.required<Pokemon>()
   loaderComponent = viewChild<LoaderComponent | undefined>('loader')
-
   pokemonService = inject(PokemonShopService)
-
   pokemonDetail = signal<PokemonDetail | null>(null)
   loading = computed(() => this.pokemonDetail() == null)
 
@@ -47,9 +48,6 @@ export class PokemonCardComponent implements OnInit,AfterViewInit {
 
   ngOnInit(): void{
     this.getPokemonImage()
-  }
-
-  ngAfterViewInit(): void {
   }
 
   getPokemonImage(): void{
@@ -66,5 +64,9 @@ export class PokemonCardComponent implements OnInit,AfterViewInit {
     this.destroyRef.onDestroy(() => {
       sub.unsubscribe()
     })
+  }
+
+  onClickedBuy(){
+    this.store.dispatch(addPokemon({ pokemon: this.pokemon() }))
   }
 }
