@@ -12,3 +12,11 @@ export const deletePokemon = createAction(
   `${pokemonKey} Delete Pokemon`,
   props<{name: string}>()
 )
+
+export const addPokemonSuccess = createAction(
+  `${pokemonKey} Add Pokemon Success`,
+)
+
+export const addPokemonError = createAction(
+  `${pokemonKey} Add Pokemon Error`,
+)

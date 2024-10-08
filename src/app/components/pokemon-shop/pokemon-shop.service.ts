@@ -1,6 +1,7 @@
+import { addPokemon } from './../../store/pokemon/pokemon.actions';
 import { HttpClient } from '@angular/common/http';
 import {computed, inject, Injectable, Signal, signal} from '@angular/core';
-import { concatMap, delay, map, Subscription, timeout } from 'rxjs';
+import { concatMap, delay, map, Observable, of, Subject, Subscription, throwError, timeout } from 'rxjs';
 import { Pokemon, PokemonDetail, PokemonListResponse } from './pokemon-shop.model';
 
 @Injectable({
@@ -19,5 +20,13 @@ export class PokemonShopService {
 
   getPokemonDetail(pokemonName: string){
     return  this.http.get<PokemonDetail>(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`)
+  }
+
+
+  addPokemon(pokemon: Pokemon): Observable<void> {
+    // return throwError(() => new Error("my error"))
+    //add pokemon service
+    console.log('call addPokemonService', JSON.stringify(pokemon))
+    return of(void 0)
   }
 }
