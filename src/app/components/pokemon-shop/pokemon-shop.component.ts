@@ -28,7 +28,7 @@ import { AsyncPipe } from '@angular/common';
       <app-pokemon-cards></app-pokemon-cards>
     </div>
   `,
-  styleUrl: './pokemon-shop.component.css',
+  styleUrl: './pokemon-shop.component.css'
 })
 export class PokemonShopComponent implements OnInit {
   destroyRef = inject(DestroyRef)

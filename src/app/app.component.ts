@@ -9,7 +9,7 @@ import { PokemonMenuComponent } from './components/shared/pokemon-menu/pokemon-m
   standalone: true,
   imports: [PokemonMenuComponent, RouterOutlet],
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'],
+  styleUrls: ['./app.component.css']
 })
 export class AppComponent {
   title = 'main title';
