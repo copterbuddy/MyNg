@@ -6,6 +6,7 @@ import { GetterFunctionComponent } from "./components/getter-function/getter-fun
 import { EmitEventByNgComponent } from "./components/emit-event-by-ng/emit-event-by-ng.component";
 import { PokemonShopComponent } from "./components/pokemon-shop/pokemon-shop.component";
 import { MyPokemonComponent } from "./components/pokemon-shop/my-pokemon/my-pokemon.component";
+import { authGuard } from "./components/shared/auth.guard";
 
 export const routes: Routes = [
   {
@@ -17,7 +18,8 @@ export const routes: Routes = [
   {
     path: 'my-pokemon',
     component: MyPokemonComponent,
-    title: 'my pokemon'
+    title: 'my pokemon',
+    canActivate: [authGuard],
   },
   {
     path: 'set-title',
