@@ -1,7 +1,6 @@
-import { addPokemon } from './../../store/pokemon/pokemon.actions';
 import { HttpClient } from '@angular/common/http';
-import {computed, inject, Injectable, Signal, signal} from '@angular/core';
-import { concatMap, delay, map, Observable, of, Subject, Subscription, throwError, timeout } from 'rxjs';
+import { inject, Injectable } from '@angular/core';
+import { Observable, of } from 'rxjs';
 import { Pokemon, PokemonDetail, PokemonListResponse } from './pokemon-shop.model';
 
 @Injectable({

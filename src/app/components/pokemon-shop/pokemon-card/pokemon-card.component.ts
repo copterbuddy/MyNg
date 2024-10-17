@@ -38,7 +38,6 @@ import { PokemonFacade } from 'src/app/store/pokemon/pokemon.facade';
 })
 export class PokemonCardComponent implements OnInit {
   private readonly destroyRef = inject(DestroyRef)
-  // private readonly store = inject(Store)
   private readonly pokemonFacade: PokemonFacade = inject(PokemonFacade)
   pokemon = input.required<Pokemon>()
   loaderComponent = viewChild<LoaderComponent | undefined>('loader')
@@ -69,7 +68,6 @@ export class PokemonCardComponent implements OnInit {
   }
 
   onClickedBuy(){
-    // this.store.dispatch(addPokemon({ pokemon: this.pokemon() }))
     this.pokemonFacade.addPokemon(this.pokemon())
   }
 }
