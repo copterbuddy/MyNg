@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import {RouterLink, RouterLinkActive} from '@angular/router';
 import { LoginService } from '../modal/login/login.service';
-import { AuthFacdes as AuthFacdes } from 'src/app/store/auth/auth.facades';
+import { AuthFacdes } from 'src/app/store/auth/auth.facades';
 import { AsyncPipe } from '@angular/common';
 
 @Component({

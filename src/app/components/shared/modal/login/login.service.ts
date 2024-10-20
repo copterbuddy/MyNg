@@ -7,10 +7,9 @@ import { AuthFacdes } from 'src/app/store/auth/auth.facades';
   providedIn: 'root'
 })
 export class LoginService {
-  private modalService  = inject(NgbModal)
+  private readonly modalService  = inject(NgbModal)
 
   authFacade = inject(AuthFacdes)
-
 
   Open() {
 		const modalRef = this.modalService.open(LoginComponent, { centered: true }).componentInstance as LoginComponent;

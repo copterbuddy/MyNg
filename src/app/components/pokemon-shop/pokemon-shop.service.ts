@@ -20,12 +20,4 @@ export class PokemonShopService {
   getPokemonDetail(pokemonName: string){
     return  this.http.get<PokemonDetail>(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`)
   }
-
-
-  addPokemon(pokemon: Pokemon): Observable<void> {
-    // return throwError(() => new Error("my error"))
-    //add pokemon service
-    console.log('call addPokemonService', JSON.stringify(pokemon))
-    return of(void 0)
-  }
 }

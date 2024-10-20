@@ -13,3 +13,8 @@ export const selectForceLogin: MemoizedSelector<Appstate, boolean> = createSelec
   selectAuthFeature,
   (state: AuthState): boolean => state.ForceLogin
 )
+
+export const selectAuthUserInfo: MemoizedSelector<Appstate, string> = createSelector(
+  selectAuthFeature,
+  (state: AuthState): string => state.UserId
+)
