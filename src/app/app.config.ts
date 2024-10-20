@@ -9,13 +9,14 @@ import { pokemonReducers } from './store/pokemon/pokemon.reducers';
 import { provideEffects } from '@ngrx/effects';
 import { addPokemon$ } from './store/pokemon/pokemon.effects';
 import { authReducers } from './store/auth/auth.reducers';
+import { authLogin$ } from './store/auth/auth.effects';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
     provideHttpClient(withFetch()),
     provideStore({ pokemon: pokemonReducers, auth: authReducers}),
-    provideEffects({ addPokemon$ }),
+    provideEffects({ addPokemon$, authLogin$ }),
     provideStoreDevtools({
       maxAge: 25, // Retains last 25 states
       logOnly: !isDevMode(), // Restrict extension to log-only mode
