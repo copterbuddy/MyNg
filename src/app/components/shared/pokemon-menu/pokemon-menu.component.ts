@@ -16,11 +16,6 @@ export class PokemonMenuComponent {
   authFacade = inject(AuthFacdes)
 
   open() {
-    this.authFacade.login('2')
     this.loginService.Open()
-
-    this.authFacade.isLogin().subscribe(isLoggedIn => {
-      console.log('my auth is ', isLoggedIn);
-    });
   }
 }

@@ -1,9 +1,11 @@
 export interface AuthState{
+  UserId: string,
   IsLoggedIn: boolean,
-  UserId: string
+  ForceLogin: boolean,
 }
 
 export const initialState: AuthState = {
+  UserId: '',
   IsLoggedIn: false,
-  UserId: ''
+  ForceLogin: false,
 }

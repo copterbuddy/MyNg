@@ -1,7 +1,7 @@
 import { inject, Injectable } from "@angular/core";
 import { Store } from "@ngrx/store";
-import { login, logout } from "./auth.actions";
-import { selectAuthIsLoggedIn } from "./auth.selectors";
+import { forceLogin, login, logout } from "./auth.actions";
+import { selectAuthIsLoggedIn, selectForceLogin } from "./auth.selectors";
 
 @Injectable({
   providedIn: 'root'
@@ -19,5 +19,13 @@ export class AuthFacdes {
 
   isLogin(){
     return this.store.select(selectAuthIsLoggedIn)
+  }
+
+  forceLogin(value: boolean){
+    this.store.dispatch(forceLogin({ value }))
+  }
+
+  isForceLogin(){
+    return this.store.select(selectForceLogin)
   }
 }

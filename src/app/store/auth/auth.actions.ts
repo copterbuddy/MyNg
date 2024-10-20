@@ -10,3 +10,8 @@ export const login = createAction(
 export const logout = createAction(
   `${authKey} Logout`,
 )
+
+export const forceLogin = createAction(
+  `${authKey} Force Login`,
+  props<{ value: boolean}>()
+)

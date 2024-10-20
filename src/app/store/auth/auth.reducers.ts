@@ -1,4 +1,4 @@
-import { login, logout } from './auth.actions';
+import { forceLogin, login, logout } from './auth.actions';
 import { AuthState, initialState } from './auth.state';
 import { ActionReducer, createReducer, on } from "@ngrx/store";
 
@@ -9,5 +9,8 @@ export const authReducers: ActionReducer<AuthState> = createReducer(
   })),
   on(logout, (state: AuthState) => ({
     ...state, IsLoggedIn: false, UserId: ''
+  })),
+  on(forceLogin, (state: AuthState, { value }) => ({
+    ...state, ForceLogin: value
   }))
 )
