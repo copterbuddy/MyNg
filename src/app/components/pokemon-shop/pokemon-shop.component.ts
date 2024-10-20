@@ -4,8 +4,8 @@ import { PokemonCardComponent } from './pokemon-card/pokemon-card.component';
 import { PokemonCardsComponent } from './pokemon-cards/pokemon-cards.component';
 import { PokemonMenuComponent } from '../shared/pokemon-menu/pokemon-menu.component';
 import { PokemonFacade } from 'src/app/store/pokemon/pokemon.facade';
-import { Pokemon } from './pokemon-shop.model';
 import { AsyncPipe } from '@angular/common';
+import { LoginComponent } from "../shared/modal/login/login.component";
 
 @Component({
   selector: 'app-pokemon',
@@ -16,8 +16,9 @@ import { AsyncPipe } from '@angular/common';
     PokemonMenuComponent,
     RouterOutlet,
     PokemonCardsComponent,
-    AsyncPipe
-  ],
+    AsyncPipe,
+    LoginComponent
+],
   template: `
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <div style="margin-left: 5px;">
@@ -31,9 +32,10 @@ import { AsyncPipe } from '@angular/common';
   styleUrl: './pokemon-shop.component.css'
 })
 export class PokemonShopComponent implements OnInit {
-  destroyRef = inject(DestroyRef)
+  private readonly destroyRef = inject(DestroyRef)
+
   pokemonFacade = inject(PokemonFacade)
-  // myTotalPokemon: number = 0
+
 
   ngOnInit(): void{
     this.destroyRef.onDestroy(() => {

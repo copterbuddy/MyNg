@@ -1,5 +1,7 @@
+import { AuthState } from "./auth/auth.state";
 import { PokemonState } from "./pokemon/pokemon.state";
 
 export interface Appstate{
-  pokemon?: PokemonState
+  pokemon?: PokemonState,
+  auth?: AuthState
 }

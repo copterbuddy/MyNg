@@ -19,5 +19,5 @@ export const addPokemon$ = createEffect(
       )
     )
   },
-  {functional: true}
+  {functional: true, dispatch: false}
 )

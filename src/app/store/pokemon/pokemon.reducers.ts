@@ -4,7 +4,7 @@ import { addPokemon, deletePokemon } from "./pokemon.actions";
 
 export const pokemonReducers: ActionReducer<PokemonState> = createReducer(
   initialState,
-  on(addPokemon, (state: PokemonState, { pokemon}) =>
+  on(addPokemon, (state: PokemonState, { pokemon }) =>
     adapter.addOne(pokemon, state)
   ),
   on(deletePokemon, (state: PokemonState, { name }) =>

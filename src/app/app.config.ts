@@ -8,12 +8,13 @@ import {provideStoreDevtools} from "@ngrx/store-devtools";
 import { pokemonReducers } from './store/pokemon/pokemon.reducers';
 import { provideEffects } from '@ngrx/effects';
 import { addPokemon$ } from './store/pokemon/pokemon.effects';
+import { authReducers } from './store/auth/auth.reducers';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
     provideHttpClient(withFetch()),
-    provideStore({ pokemon: pokemonReducers}),
+    provideStore({ pokemon: pokemonReducers, auth: authReducers}),
     provideEffects({ addPokemon$ }),
     provideStoreDevtools({
       maxAge: 25, // Retains last 25 states
