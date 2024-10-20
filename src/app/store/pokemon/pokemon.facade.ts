@@ -1,4 +1,4 @@
-import { addPokemon } from './pokemon.actions';
+import { addPokemon, deletePokemon } from './pokemon.actions';
 import { Pokemon } from './../../components/pokemon-shop/pokemon-shop.model';
 import { Store } from '@ngrx/store';
 import { inject, Injectable } from "@angular/core";
@@ -23,5 +23,9 @@ export class PokemonFacade {
 
   addPokemon(pokemon: Pokemon) {
     this.store.dispatch(addPokemon({ pokemon }))
+  }
+
+  deletePokemon(name: string){
+    this.store.dispatch(deletePokemon({ name }))
   }
 }

@@ -8,6 +8,6 @@ export const selectPokemonFeature: MemoizedSelector<Appstate, PokemonState> = cr
 export const selectPokemon: MemoizedSelector<Appstate, Pokemon[]> =
 createSelector(
   selectPokemonFeature,
-  ({ entities }: PokemonState): Pokemon[] =>
-    Object.values(entities) as Pokemon[]
+  (state: PokemonState): Pokemon[] =>
+    state.pokemon
 )
