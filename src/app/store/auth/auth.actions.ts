@@ -7,6 +7,14 @@ export const login = createAction(
   props<{ userId: string }>()
 )
 
+export const loginSuccess = createAction(
+  `${authKey} Login Success`,
+)
+
+export const loginFailed = createAction(
+  `${authKey} Login Failed`,
+)
+
 export const logout = createAction(
   `${authKey} Logout`,
 )

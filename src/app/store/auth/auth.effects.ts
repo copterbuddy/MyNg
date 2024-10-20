@@ -1,7 +1,7 @@
 import { inject } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
-import { login } from "./auth.actions";
-import { map, mergeMap, tap } from "rxjs";
+import { login, loginFailed, loginSuccess } from "./auth.actions";
+import { catchError, map, mergeMap, tap } from "rxjs";
 import { LocalStorageKey, LocalStorageService } from "src/app/components/shared/services/localStorage/local-storage.service";
 
 export const authLogin$ = createEffect(
@@ -10,8 +10,13 @@ export const authLogin$ = createEffect(
       ofType(login),
       tap(({ userId }) => {
         localStorageService.saveData(LocalStorageKey.TOKEN, userId)
-      })
+      }),
+      map(() => loginSuccess()),
+      catchError((error => {
+        console.warn('An error occurred while adding Pokemon:', error);
+        return [loginFailed()]
+      }))
     )
   },
-  {functional: true, dispatch: false}
+  {functional: true, dispatch: true}
 )
