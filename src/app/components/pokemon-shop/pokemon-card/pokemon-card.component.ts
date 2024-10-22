@@ -14,6 +14,7 @@ import { RouterLink } from '@angular/router';
 import { PokemonShopService } from '../pokemon-shop.service';
 import { LoaderComponent } from '../../shared/loader/loader.component';
 import { PokemonFacade } from 'src/app/store/pokemon/pokemon.facade';
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-pokemon-card',
@@ -55,13 +56,17 @@ export class PokemonCardComponent implements OnInit {
   getPokemonImage(): void {
     let sub = this.pokemonService
       .getPokemonDetail(this.pokemon().name)
+      .pipe(
+        finalize(() => {
+          this.loaderComponent()?.isLoading.set(false);
+        })
+      )
       .subscribe({
         next: (detail) => {
           this.pokemonDetail.set(detail);
-          this.loaderComponent()?.isLoading.set(false);
         },
-        error: () => {
-          this.loaderComponent()?.isLoading.set(false);
+        error: (err) => {
+          console.log(err);
         },
       });
 

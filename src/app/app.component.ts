@@ -1,5 +1,5 @@
 import { AuthFacdes } from 'src/app/store/auth/auth.facades';
-import { Component, inject, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
 import {
   RouterOutlet,
 } from '@angular/router';
@@ -18,7 +18,8 @@ import { LocalStorageKey, LocalStorageService } from './components/shared/servic
     <router-outlet />
   </div>
   `,
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent implements OnInit {
   AuthFacdes = inject(AuthFacdes)
