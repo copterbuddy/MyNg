@@ -7,7 +7,6 @@ import { PokemonMenuComponent } from '../shared/pokemon-menu/pokemon-menu.compon
 import { PokemonFacade } from 'src/app/store/pokemon/pokemon.facade';
 import { AsyncPipe } from '@angular/common';
 import { LoginComponent } from "../shared/modal/login/login.component";
-import { takeLast } from 'rxjs';
 import { LoginService } from '../shared/modal/login/login.service';
 
 @Component({

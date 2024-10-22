@@ -10,7 +10,14 @@ import { LocalStorageKey, LocalStorageService } from './components/shared/servic
   selector: 'app-root',
   standalone: true,
   imports: [PokemonMenuComponent, RouterOutlet],
-  templateUrl: './app.component.html',
+  template: `
+  <div class="d-flex flex-row">
+    <app-pokemon-menu
+      class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark min-vh-100"
+    ></app-pokemon-menu>
+    <router-outlet />
+  </div>
+  `,
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {

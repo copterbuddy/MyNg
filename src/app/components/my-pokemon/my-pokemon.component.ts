@@ -2,7 +2,6 @@ import { Pokemon } from 'src/app/components/pokemon-shop/pokemon-shop.model';
 import { PokemonFacade } from 'src/app/store/pokemon/pokemon.facade';
 import { Component, OnInit, inject, DestroyRef } from '@angular/core';
 import { AsyncPipe } from '@angular/common';
-import { map } from 'rxjs';
 
 @Component({
   selector: 'app-my-pokemon',

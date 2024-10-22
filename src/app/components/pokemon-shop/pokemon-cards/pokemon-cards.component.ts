@@ -1,6 +1,5 @@
-import {Component, DestroyRef, inject, OnDestroy, OnInit, signal} from '@angular/core';
+import {Component, DestroyRef, inject, OnInit, signal} from '@angular/core';
 import { PokemonCardComponent } from '../pokemon-card/pokemon-card.component';
-import { Subscription } from 'rxjs';
 import { Pokemon } from '../pokemon-shop.model';
 import { PokemonShopService } from '../pokemon-shop.service';
 
