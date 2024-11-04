@@ -1,8 +1,13 @@
 import { createFeatureSelector, createSelector, MemoizedSelector } from "@ngrx/store";
 import { Appstate } from "..";
-import { AuthState } from "./auth.state";
+import { AuthState, UserInfo } from "./auth.state";
 
 export const selectAuthFeature: MemoizedSelector<Appstate, AuthState> = createFeatureSelector<AuthState>('auth')
+
+export const selectAuthIsGoogleLogin: MemoizedSelector<Appstate, boolean> = createSelector(
+  selectAuthFeature,
+  (state: AuthState): boolean => state.IsGoogleLogin
+)
 
 export const selectAuthIsLoggedIn: MemoizedSelector<Appstate, boolean> = createSelector(
   selectAuthFeature,
@@ -14,7 +19,17 @@ export const selectForceLogin: MemoizedSelector<Appstate, boolean> = createSelec
   (state: AuthState): boolean => state.ForceLogin
 )
 
-export const selectAuthUserInfo: MemoizedSelector<Appstate, string> = createSelector(
+export const selectAuthUserId: MemoizedSelector<Appstate, string> = createSelector(
   selectAuthFeature,
   (state: AuthState): string => state.UserId
+)
+
+export const selectAuthUserInfo: MemoizedSelector<Appstate, UserInfo> = createSelector(
+  selectAuthFeature,
+  (state: AuthState): UserInfo => state.UserInfo
+)
+
+export const selectAuth: MemoizedSelector<Appstate, AuthState> = createSelector(
+  selectAuthFeature,
+  (state: AuthState): AuthState => state
 )

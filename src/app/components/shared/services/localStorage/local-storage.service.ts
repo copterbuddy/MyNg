@@ -20,4 +20,5 @@ export class LocalStorageService {
 
 export enum LocalStorageKey {
   TOKEN = 'token',
+  IsGoogleLogin = 'IsGoogleLogin',
 }

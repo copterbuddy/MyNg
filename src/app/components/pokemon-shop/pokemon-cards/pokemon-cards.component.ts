@@ -1,3 +1,4 @@
+import { catchError } from 'rxjs';
 import {Component, DestroyRef, inject, OnInit, signal} from '@angular/core';
 import { PokemonCardComponent } from '../pokemon-card/pokemon-card.component';
 import { Pokemon } from '../pokemon-shop.model';
@@ -21,8 +22,8 @@ export class PokemonCardsComponent  implements OnInit {
     let sub = this.pokemonService.getPokemons()
     .subscribe({
       next: (pokemonList) => {
-        this.pokemonList.update((value) => [...value, ...pokemonList.results]);
-      },
+        this.pokemonList.update((value) => [...value, ...pokemonList]);
+      }
     });
 
     this.destroyRef.onDestroy(() => {

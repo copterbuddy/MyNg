@@ -1,5 +1,5 @@
 import { AuthFacdes } from 'src/app/store/auth/auth.facades';
-import { Component, DestroyRef, inject, OnInit } from '@angular/core';
+import { Component, DestroyRef, effect, inject, OnInit, signal } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { PokemonCardComponent } from './pokemon-card/pokemon-card.component';
 import { PokemonCardsComponent } from './pokemon-cards/pokemon-cards.component';
@@ -8,6 +8,10 @@ import { PokemonFacade } from 'src/app/store/pokemon/pokemon.facade';
 import { AsyncPipe } from '@angular/common';
 import { LoginComponent } from "../shared/modal/login/login.component";
 import { LoginService } from '../shared/modal/login/login.service';
+import { LocalStorageKey, LocalStorageService } from '../shared/services/localStorage/local-storage.service';
+import { take, finalize } from 'rxjs';
+import { UserInfo } from 'src/app/store/auth/auth.state';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-pokemon',
@@ -36,12 +40,60 @@ import { LoginService } from '../shared/modal/login/login.service';
 export class PokemonShopComponent implements OnInit {
   private readonly destroyRef = inject(DestroyRef)
   private readonly authFacdes = inject(AuthFacdes)
+  http = inject(HttpClient)
 
   pokemonFacade = inject(PokemonFacade)
   loginService = inject(LoginService)
 
+  authFacade = inject(AuthFacdes)
+  isLoginFromGoogle = signal<boolean>(false)
+  localStorageService = inject(LocalStorageService)
+  baseUrl = 'http://localhost:5131'
+
+  constructor() {
+    effect(() => {
+      if(this.isLoginFromGoogle()){
+        // this.authFacade.setUserInfoClient()
+
+      }
+    })
+  }
 
   ngOnInit(): void{
+    console.log("ngOnInit")
+    this.authFacade.getUser().pipe(take(1)).subscribe({
+    // this.authFacade.getUser().subscribe({
+      next: (value) => {
+        let isLogin = value.IsGoogleLogin
+        if(!isLogin) {
+          isLogin = (this.localStorageService.getData(LocalStorageKey.IsGoogleLogin) ?? false) === 'true';
+        }
+
+        this.isLoginFromGoogle.set(isLogin)
+
+        if(isLogin) {
+          this.authFacade.setUserInfoClient()
+          /*
+          let user = this.http.get<UserInfo>(`${this.baseUrl}/GoogleLogin/GetInfo`, {withCredentials: true})
+        .subscribe({
+          next: (value) => {
+            console.log("client get info", value)
+          },
+          error: (ex) => {
+            console.warn(ex)
+          }
+        })
+          */
+        }
+      },
+      error:(ex) => {
+        console.log(ex)
+      },
+      complete: () => {
+        console.log("finalize")
+      }
+    })
+
     this.authFacdes.isForceLogin().subscribe({
       next: (value) => {
         if (value) {
