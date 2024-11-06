@@ -11,7 +11,7 @@ export const selectAuthIsGoogleLogin: MemoizedSelector<Appstate, boolean> = crea
 
 export const selectAuthIsLoggedIn: MemoizedSelector<Appstate, boolean> = createSelector(
   selectAuthFeature,
-  (state: AuthState): boolean => state.IsLoggedIn
+  (state: AuthState): boolean => !!state?.UserInfo?.Email
 )
 
 export const selectForceLogin: MemoizedSelector<Appstate, boolean> = createSelector(

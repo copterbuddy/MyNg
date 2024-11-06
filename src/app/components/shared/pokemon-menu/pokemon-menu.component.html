@@ -47,7 +47,7 @@
 
 <!-- user -->
 @if ((authFacade.isLogin() | async) === false) {
-  <button class="btn btn-success" (click)="open()">Modal</button>
+  <button class="btn btn-success" (click)="login()">Modal</button>
 } @else {
   <button class="btn btn-primary" (click)="logout()">logout</button>
 <div class="dropdown">

@@ -11,7 +11,7 @@ export const authReducers: ActionReducer<AuthState> = createReducer(
     ...state, IsGoogleLogin: true
   })),
   on(logout, (state: AuthState) => ({
-    ...state, IsLoggedIn: false, UserId: ''
+    ...state, IsLoggedIn: false, UserId: '', UserInfo: { Email: '' }
   })),
   on(forceLogin, (state: AuthState, { value }) => ({
     ...state, ForceLogin: value

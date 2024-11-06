@@ -1,11 +1,11 @@
 import { inject } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
-import { login, loginFailed, loginFromGoogle, loginFromGoogleFlagSaveFailed, loginFromGoogleFlagSaveSuccess, loginSuccess, setUserInfoClient, setUserInformation, setUserInformationFailed, setUserInformationSuccess } from "./auth.actions";
+import { login, loginFailed, loginFromGoogle, loginFromGoogleFlagSaveFailed, loginFromGoogleFlagSaveSuccess, loginSuccess, logout, setUserInfoClient, setUserInformation, setUserInformationFailed, setUserInformationSuccess } from "./auth.actions";
 import { catchError, map, of, switchMap, take, tap, withLatestFrom } from "rxjs";
 import { LocalStorageKey, LocalStorageService } from "src/app/components/shared/services/localStorage/local-storage.service";
 import { AuthFacdes } from "./auth.facades";
 import { UserInfo } from "./auth.state";
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 
 let baseUrl = 'http://localhost:5131'
 
@@ -15,6 +15,23 @@ export const authLogin$ = createEffect(
       ofType(login),
       tap(({ userId }) => {
         localStorageService.saveData(LocalStorageKey.TOKEN, userId)
+      }),
+      map(() => loginSuccess()),
+      catchError((error => {
+        console.warn('An error occurred while adding Pokemon:', error);
+        return [loginFailed()]
+      }))
+    )
+  },
+  {functional: true, dispatch: true}
+)
+
+export const authLogout$ = createEffect(
+  (actions$ = inject(Actions),localStorageService = inject(LocalStorageService),authFacades = inject(AuthFacdes)) => {
+    return actions$.pipe(
+      ofType(logout),
+      tap(() => {
+        localStorageService.removeData(LocalStorageKey.TOKEN)
       }),
       map(() => loginSuccess()),
       catchError((error => {
@@ -49,30 +66,26 @@ export const authLoginFromGoogle$ = createEffect(
 )
 
 export const authSetUserInformation$ = createEffect(
-  (actions$ = inject(Actions),http = inject(HttpClient),authFacades = inject(AuthFacdes)) => {
+  (actions$ = inject(Actions), http = inject(HttpClient), authFacades = inject(AuthFacdes), localStorageService = inject(LocalStorageService)) => {
     return actions$.pipe(
       ofType(setUserInfoClient),
-      map(() => {
-        let user = http.get<UserInfo>(`${baseUrl}/GoogleLogin/GetInfo`, {withCredentials: true})
-        return user
-      }),
-      map((user) => {
-        user.pipe(
+      switchMap(() =>
+        http.get<UserInfo>(`${baseUrl}/GoogleLogin/GetInfo`, { withCredentials: true }).pipe(
           take(1),
-        )
-        .subscribe({
-          next: (value) => {
-            console.log("client get info", value)
+          tap((value) => {
             authFacades.setUserInfo(value)
-          }
-        })
-        return setUserInformationSuccess()
-      }),
-      catchError((error => {
-        console.warn('An error occurred while set User Information:', error);
-        return [setUserInformationFailed()]
-      }))
-    )
+            localStorageService.saveData(LocalStorageKey.IsGoogleLogin, 'false')
+          }),
+          map(() => setUserInformationSuccess()),
+          catchError((error) => {
+            if (error instanceof HttpErrorResponse && error.status !== 401) {
+              console.warn(error);
+            }
+            return [setUserInformationFailed()];
+          })
+        )
+      )
+    );
   },
-  {functional: true, dispatch: true}
-)
+  { functional: true, dispatch: true }
+);

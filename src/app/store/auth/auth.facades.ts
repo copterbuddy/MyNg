@@ -2,17 +2,13 @@ import { UserInfo } from './auth.state';
 import { inject, Injectable } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { forceLogin, login, loginFromGoogle, logout, setUserInfoClient, setUserInformation } from "./auth.actions";
-import { selectAuthIsLoggedIn, selectAuthUserId, selectForceLogin as selectAuthForceLogin, selectAuth } from "./auth.selectors";
+import { selectAuthIsLoggedIn, selectAuthUserId, selectForceLogin as selectAuthForceLogin, selectAuth, selectAuthUserInfo } from "./auth.selectors";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthFacdes {
   private readonly store: Store = inject(Store)
-
-  login(userId: string){
-    this.store.dispatch(login({ userId }))
-  }
 
   loginFromGoogle(){
     this.store.dispatch(loginFromGoogle())

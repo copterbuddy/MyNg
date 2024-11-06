@@ -42,10 +42,6 @@ export class LoginComponent {
     this.name.set(text)
   }
 
-  login(){
-    this.authFacades.login('2')
-  }
-
 
   loginWithGoogle() {
     this.authFacades.loginFromGoogle();

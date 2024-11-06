@@ -29,9 +29,5 @@ export class AppComponent implements OnInit {
   token: string | null = null
 
   ngOnInit(): void {
-    this.token = this.localStorageService.getData(LocalStorageKey.TOKEN)
-    if (this.token) {
-      this.AuthFacdes.login(this.token)
-    }
   }
 }

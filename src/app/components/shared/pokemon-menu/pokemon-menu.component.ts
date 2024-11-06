@@ -19,11 +19,13 @@ export class PokemonMenuComponent {
 
   logout(){
     this.http.get('http://localhost:5131/GoogleLogin/SignOutFromGoogleLogin', {withCredentials: true}).subscribe({
-      next: (value) => {console.log},
+      next: () => {
+        this.authFacade.logout()
+      },
     })
   }
 
-  open() {
+  login() {
     this.loginService.Open()
   }
 }

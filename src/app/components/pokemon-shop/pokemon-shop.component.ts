@@ -51,18 +51,16 @@ export class PokemonShopComponent implements OnInit {
   baseUrl = 'http://localhost:5131'
 
   constructor() {
-    effect(() => {
-      if(this.isLoginFromGoogle()){
-        // this.authFacade.setUserInfoClient()
+    // effect(() => {
+    //   if(this.isLoginFromGoogle()){
+    //     // this.authFacade.setUserInfoClient()
 
-      }
-    })
+    //   }
+    // })
   }
 
   ngOnInit(): void{
-    console.log("ngOnInit")
     this.authFacade.getUser().pipe(take(1)).subscribe({
-    // this.authFacade.getUser().subscribe({
       next: (value) => {
         let isLogin = value.IsGoogleLogin
         if(!isLogin) {
@@ -70,27 +68,17 @@ export class PokemonShopComponent implements OnInit {
         }
 
         this.isLoginFromGoogle.set(isLogin)
+        this.authFacade.setUserInfoClient()
 
         if(isLogin) {
-          this.authFacade.setUserInfoClient()
-          /*
-          let user = this.http.get<UserInfo>(`${this.baseUrl}/GoogleLogin/GetInfo`, {withCredentials: true})
-        .subscribe({
-          next: (value) => {
-            console.log("client get info", value)
-          },
-          error: (ex) => {
-            console.warn(ex)
-          }
-        })
-          */
+          this.isLoginFromGoogle.set(false)
+          this.loginService.Open()
         }
       },
       error:(ex) => {
         console.log(ex)
       },
       complete: () => {
-        console.log("finalize")
       }
     })
 
