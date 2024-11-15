@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import {RouterLink, RouterLinkActive} from '@angular/router';
 import { LoginService } from '../modal/login/login.service';
 import { AuthFacdes } from 'src/app/store/auth/auth.facades';
@@ -12,10 +12,19 @@ import { HttpClient } from '@angular/common/http';
   templateUrl: './pokemon-menu.component.html',
   styleUrl: './pokemon-menu.component.css'
 })
-export class PokemonMenuComponent {
+export class PokemonMenuComponent implements OnInit {
   loginService = inject(LoginService);
   authFacade = inject(AuthFacdes)
   http = inject(HttpClient)
+  userName = signal<string>("")
+
+  ngOnInit(): void {
+    this.authFacade.getUser().subscribe({
+      next: (user) => {
+        this.userName.set(user?.UserInfo?.Email ?? '')
+      }
+    })
+  }
 
   logout(){
     this.http.get('http://localhost:5131/GoogleLogin/SignOutFromGoogleLogin', {withCredentials: true}).subscribe({

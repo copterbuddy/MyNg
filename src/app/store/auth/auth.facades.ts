@@ -2,7 +2,7 @@ import { UserInfo } from './auth.state';
 import { inject, Injectable } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { forceLogin, login, loginFromGoogle, logout, setUserInfoClient, setUserInformation } from "./auth.actions";
-import { selectAuthIsLoggedIn, selectAuthUserId, selectForceLogin as selectAuthForceLogin, selectAuth, selectAuthUserInfo } from "./auth.selectors";
+import { selectAuthIsLoggedIn, selectForceLogin as selectAuthForceLogin, selectAuth, selectAuthUserInfo } from "./auth.selectors";
 
 @Injectable({
   providedIn: 'root'
@@ -32,10 +32,6 @@ export class AuthFacdes {
 
   isForceLogin(){
     return this.store.select(selectAuthForceLogin)
-  }
-
-  getUserInfo(){
-    return this.store.select(selectAuthUserId)
   }
 
   setUserInfoClient(){

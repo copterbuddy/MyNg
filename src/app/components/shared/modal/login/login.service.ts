@@ -14,15 +14,5 @@ export class LoginService {
 
   Open() {
 		const modalRef = this.modalService.open(LoginComponent, { centered: true }).componentInstance as LoginComponent;
-
-    this.authFacade.getUser().pipe(
-      take(1)
-    )
-    .subscribe({
-      next: (authState) => {
-        console.log(JSON.stringify(authState))
-        modalRef.SetName(authState?.UserInfo?.Email ?? '')
-      }
-    })
 	}
 }

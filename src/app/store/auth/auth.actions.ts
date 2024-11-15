@@ -42,7 +42,7 @@ export const setUserInfoClient = createAction(
 )
 
 export const setUserInformation = createAction(
-  `${authKey} Set User Information`,
+`${authKey} Set User Information`,
   props<{ userInfo: UserInfo}>()
 )
 

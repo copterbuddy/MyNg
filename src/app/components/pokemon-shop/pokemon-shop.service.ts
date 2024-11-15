@@ -14,7 +14,6 @@ export class PokemonShopService {
   baseUrl = 'http://localhost:5131'
 
   getPokemons(){
-    console.log("call pokemons")
     return this.http
       .get<PokemonListResponse>(
         `${this.baseUrl}/pokemons`

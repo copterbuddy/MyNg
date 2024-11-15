@@ -65,16 +65,26 @@ export const authLoginFromGoogle$ = createEffect(
   {functional: true, dispatch: true}
 )
 
+interface UserInfoResponse{
+  email: string
+}
+
 export const authSetUserInformation$ = createEffect(
   (actions$ = inject(Actions), http = inject(HttpClient), authFacades = inject(AuthFacdes), localStorageService = inject(LocalStorageService)) => {
     return actions$.pipe(
       ofType(setUserInfoClient),
       switchMap(() =>
-        http.get<UserInfo>(`${baseUrl}/GoogleLogin/GetInfo`, { withCredentials: true }).pipe(
+        http.get<UserInfoResponse>(`${baseUrl}/GoogleLogin/GetInfo`, { withCredentials: true }).pipe(
           take(1),
           tap((value) => {
-            authFacades.setUserInfo(value)
+
+            let userInfo: UserInfo = {
+              Email: value.email
+            }
+
+            authFacades.setUserInfo(userInfo)
             localStorageService.saveData(LocalStorageKey.IsGoogleLogin, 'false')
+
           }),
           map(() => setUserInformationSuccess()),
           catchError((error) => {

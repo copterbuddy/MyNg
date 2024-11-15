@@ -1,8 +1,11 @@
+import { LocalStorageKey, LocalStorageService } from './../../services/localStorage/local-storage.service';
 import { AuthFacdes } from 'src/app/store/auth/auth.facades';
-import { Component, inject, input, signal, DestroyRef } from '@angular/core';
+import { Component, inject, input, signal, DestroyRef, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { AsyncPipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
+import { Subscription, take } from 'rxjs';
+import { UserInfo } from 'src/app/store/auth/auth.state';
 
 @Component({
   selector: 'app-login',
@@ -13,12 +16,12 @@ import { HttpClient } from '@angular/common/http';
 			<h4 class="modal-title">Hi there!</h4>
 			<button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('Cross click')"></button>
 		</div>
-    @if ((authFacades.isLogin() | async) == false) {
-      <button class="btn btn-primary" (click)="loginWithGoogle()">Login</button>
+    @if (!email()) {
+      <button class="btn btn-primary" (click)="loginWithGoogle()">Login With Google</button>
     }
     @else {
       <div class="modal-body">
-        <p>Hello, {{ name() }}</p>
+        <p>Hello, {{ email() }}</p>
         <p>You are logged in</p>
       </div>
     }
@@ -29,19 +32,50 @@ import { HttpClient } from '@angular/common/http';
   `,
   styleUrl: './login.component.css'
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   deftroyRef = inject(DestroyRef)
   activeModal = inject(NgbActiveModal);
 
   authFacades = inject(AuthFacdes)
   http = inject(HttpClient)
+  email = signal<string | null>(null)
 
-  name = signal<string>("")
+  localStorageService = inject(LocalStorageService)
 
-  SetName(text: string){
-    this.name.set(text)
+  isAutoLogin = false
+  authSub: Subscription | null = null
+
+
+  ngOnInit(): void {
+    let isGoogleAutoLogin = (this.localStorageService.getData(
+      LocalStorageKey.IsGoogleLogin
+    ) ?? false) === 'true';
+
+    if(isGoogleAutoLogin){
+      this.authFacades.setUserInfoClient();
+      this.isAutoLogin = isGoogleAutoLogin
+
+    }
+
+    if(this.isAutoLogin){
+      this.authSub = this.authFacades.getUser().subscribe({
+        next: (value) => {
+          this.email.set(value.UserInfo.Email);
+        },
+        error: (err) => {
+          console.log(err);
+        },
+        complete: () => {
+          this.localStorageService.removeData(LocalStorageKey.IsGoogleLogin)
+          this.isAutoLogin = false
+        },
+      })
+    }
+
+    this.deftroyRef.onDestroy(() => {
+      this.authSub?.unsubscribe();
+    })
   }
-
 
   loginWithGoogle() {
     this.authFacades.loginFromGoogle();

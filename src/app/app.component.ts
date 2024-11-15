@@ -1,10 +1,14 @@
 import { AuthFacdes } from 'src/app/store/auth/auth.facades';
-import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
 import {
   RouterOutlet,
 } from '@angular/router';
 import { PokemonMenuComponent } from './components/shared/pokemon-menu/pokemon-menu.component';
 import { LocalStorageKey, LocalStorageService } from './components/shared/services/localStorage/local-storage.service';
+import { HttpClient } from '@angular/common/http';
+import { take } from 'rxjs';
+import { LoginService } from './components/shared/modal/login/login.service';
+import { PokemonFacade } from './store/pokemon/pokemon.facade';
 
 @Component({
   selector: 'app-root',
@@ -21,13 +25,4 @@ import { LocalStorageKey, LocalStorageService } from './components/shared/servic
   styleUrls: ['./app.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AppComponent implements OnInit {
-  AuthFacdes = inject(AuthFacdes)
-  localStorageService = inject(LocalStorageService);
-
-  title = 'main title';
-  token: string | null = null
-
-  ngOnInit(): void {
-  }
-}
+export class AppComponent {}
